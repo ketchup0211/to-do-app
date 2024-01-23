@@ -1,0 +1,36 @@
+button{
+    margin : 5px;
+    border : 1px solid #ddd;
+    border-radius: 5px;
+    background-color: white;
+  }
+
+input{
+    margin: 8px;
+}
+.todo-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .todo-card {
+    margin: 8px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .done {
+    text-decoration: line-through;
+  }
+
+  .delete-btn{
+    border : 1px solid red;
+  }
+
+  .done-btn{
+    border : 1px solid blue;
+  }
+  
+
+  

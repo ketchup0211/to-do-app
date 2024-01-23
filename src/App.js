@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -32,11 +33,13 @@ function App() {
 
   function ToDoCard({ title, toDo, done, index }) {
     return (
-      <div>
+      <div className={`todo-card ${done ? "done" : ""}`}>
         <h3>{title}</h3>
         <p>{toDo}</p>
         <span>
-          <button onClick={() => onDelete(index)}>삭제하기</button>
+          <button className="delete-btn" onClick={() => onDelete(index)}>
+            삭제하기
+          </button>
           <DoneBtn
             text={done ? "취소" : "완료"}
             onClick={() => toggleDone(index)}
@@ -47,7 +50,11 @@ function App() {
   }
 
   function DoneBtn({ text, onClick }) {
-    return <button onClick={onClick}>{text}</button>;
+    return (
+      <button className="done-btn" onClick={onClick}>
+        {text}
+      </button>
+    );
   }
 
   return (
@@ -74,10 +81,19 @@ function App() {
       </form>
       <hr />
       <h2>진행 중..🔥</h2>
-      {toDos.map((item, index) => (
-        <ToDoCard key={index} {...item} index={index} />
-      ))}
+      <div className="todo-list">
+        {toDos.map(
+          (item, index) =>
+            !item.done && <ToDoCard key={index} {...item} index={index} />
+        )}
+      </div>
       <h2>완료..!🎉</h2>
+      <div className="todo-list">
+        {toDos.map(
+          (item, index) =>
+            item.done && <ToDoCard key={index} {...item} index={index} />
+        )}
+      </div>
     </div>
   );
 }
