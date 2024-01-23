@@ -1,7 +1,4 @@
-import { useState } from "react";
-import DoneBtn from "./DoneBtn.js";
-
-function ToDoCard({ title, toDo, done, index, onDelete, toggleDone }) {
+function ToDoCard({ title, toDo, done, index, toggleDone, onDelete }) {
   //  반복해서 사용하므로, 컴포넌트로 분리한다.
   return (
     //  완료 여부에 따라 클래스를 부여하고, 버튼의 라벨을 변경한다.
@@ -18,6 +15,15 @@ function ToDoCard({ title, toDo, done, index, onDelete, toggleDone }) {
         />
       </span>
     </div>
+  );
+}
+
+function DoneBtn({ text, onClick }) {
+  //  완료 여부에 따라 내부 텍스트가 바뀌므로, prop을 통해 텍스트를 받기 위해 컴포넌트로 분리한다.
+  return (
+    <button className="done-btn" onClick={onClick}>
+      {text}
+    </button>
   );
 }
 
