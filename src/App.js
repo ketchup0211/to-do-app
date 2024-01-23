@@ -11,15 +11,18 @@ function App() {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    //  title 또는 toDo가 공란이면 투두 리스트에 추가하지 않는다.
     if (title === "" || toDo === "") {
       return;
     }
+    //  title 또는 toDo가 공란이 아니면 투두 리스트에 이를 추가하고, 입력란을 공란으로 만든다.
     setTitle("");
     setToDo("");
     setToDos((currentArray) => [{ title, toDo, done: false }, ...currentArray]);
   };
 
   const toggleDone = (index) => {
+    //  해당 인덱스의 done을 반전시킨다.
     setToDos((currentArray) =>
       currentArray.map((item, i) =>
         i === index ? { ...item, done: !item.done } : item
