@@ -31,11 +31,14 @@ function App() {
   };
 
   const onDelete = (index) => {
+    //  currentArray를 해당 인덱스를 제외한 요소들로 업데이트한다.
     setToDos((currentArray) => currentArray.filter((_, i) => i !== index));
   };
 
   function ToDoCard({ title, toDo, done, index }) {
+    //  반복해서 사용하므로, 컴포넌트로 분리한다.
     return (
+      //  완료 여부에 따라 클래스를 부여하고, 버튼의 라벨을 변경한다.
       <div className={`todo-card ${done ? "done" : ""}`}>
         <h3>{title}</h3>
         <p>{toDo}</p>
@@ -53,6 +56,7 @@ function App() {
   }
 
   function DoneBtn({ text, onClick }) {
+    //  완료 여부에 따라 내부 텍스트가 바뀌므로, prop을 통해 텍스트를 받기 위해 컴포넌트로 분리한다.
     return (
       <button className="done-btn" onClick={onClick}>
         {text}
@@ -60,6 +64,7 @@ function App() {
     );
   }
 
+  //  main
   return (
     <div>
       <h1>My Todo List ({toDos.length})</h1>
@@ -70,7 +75,7 @@ function App() {
           onChange={onTitleChange}
           value={title}
           type="text"
-          placeholder="title"
+          placeholder="제목을 입력하세요..."
         ></input>
         <label htmlFor="title">내용</label>
         <input
