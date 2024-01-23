@@ -1,35 +1,12 @@
-import { useState, useEffect } from "react";
-//import ToDoCard from "./toDoCard.js";
+import { useState } from "react";
 
 function App() {
   const [title, setTitle] = useState("");
   const [toDo, setToDo] = useState("");
-  const [done, setDone] = useState(false);
   const [toDos, setToDos] = useState([]);
+
   const onTitleChange = (event) => setTitle(event.target.value);
   const onToDoChange = (event) => setToDo(event.target.value);
-
-  function ToDoCard({ title, toDo, done }) {
-    return (
-      <div>
-        <h3>{title}</h3>
-        <p>{toDo}</p>
-        <span>
-          <DeleteBtn />
-          <DoneBtn text={done ? "취소" : "완료"} />
-        </span>
-      </div>
-    );
-  }
-
-  function DeleteBtn() {
-    return <button>삭제하기</button>;
-  }
-
-  function DoneBtn({ text }) {
-    const onClick = () => setDone((current) => !current);
-    return <button onClick={onClick}>{text}</button>;
-  }
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -38,10 +15,41 @@ function App() {
     }
     setTitle("");
     setToDo("");
-    setToDos((currentArray) => [[title, toDo, done], ...currentArray]);
+    setToDos((currentArray) => [{ title, toDo, done: false }, ...currentArray]);
   };
 
-  const toggleDone = (idx) => {};
+  const toggleDone = (index) => {
+    setToDos((currentArray) =>
+      currentArray.map((item, i) =>
+        i === index ? { ...item, done: !item.done } : item
+      )
+    );
+  };
+
+  const onDelete = (index) => {
+    setToDos((currentArray) => currentArray.filter((_, i) => i !== index));
+  };
+
+  function ToDoCard({ title, toDo, done, index }) {
+    return (
+      <div>
+        <h3>{title}</h3>
+        <p>{toDo}</p>
+        <span>
+          <button onClick={() => onDelete(index)}>삭제하기</button>
+          <DoneBtn
+            text={done ? "취소" : "완료"}
+            onClick={() => toggleDone(index)}
+          />
+        </span>
+      </div>
+    );
+  }
+
+  function DoneBtn({ text, onClick }) {
+    return <button onClick={onClick}>{text}</button>;
+  }
+
   return (
     <div>
       <h1>My Todo List ({toDos.length})</h1>
@@ -60,16 +68,16 @@ function App() {
           onChange={onToDoChange}
           value={toDo}
           type="text"
-          placeholder="Write your to-do..."
+          placeholder="할 일을 입력하세요..."
         ></input>
-        <button>Add To Do</button>
+        <button>할 일 추가</button>
       </form>
       <hr />
-      <h2>Working..🔥</h2>
-      {toDos.map(([title, toDo, done]) => (
-        <ToDoCard title={title} toDo={toDo} done={done} />
+      <h2>진행 중..🔥</h2>
+      {toDos.map((item, index) => (
+        <ToDoCard key={index} {...item} index={index} />
       ))}
-      <h2>Done..!🎉</h2>
+      <h2>완료..!🎉</h2>
     </div>
   );
 }
