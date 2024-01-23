@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import ToDoCard from "./ToDoCard";
+import ToDoList from "./ToDoList";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -60,35 +61,19 @@ function App() {
       </form>
       <hr />
       <h2>진행 중..🔥</h2>
-      <div className="todo-list">
-        {toDos.map(
-          (item, index) =>
-            !item.done && (
-              <ToDoCard
-                key={index}
-                {...item}
-                toggleDone={toggleDone}
-                onDelete={onDelete}
-                index={index}
-              />
-            )
-        )}
-      </div>
+      <ToDoList
+        isDone={false}
+        toDos={toDos}
+        toggleDone={toggleDone}
+        onDelete={onDelete}
+      />
       <h2>완료..!🎉</h2>
-      <div className="todo-list">
-        {toDos.map(
-          (item, index) =>
-            item.done && (
-              <ToDoCard
-                key={index}
-                {...item}
-                toggleDone={toggleDone}
-                onDelete={onDelete}
-                index={index}
-              />
-            )
-        )}
-      </div>
+      <ToDoList
+        isDone={true}
+        toDos={toDos}
+        toggleDone={toggleDone}
+        onDelete={onDelete}
+      />
     </div>
   );
 }

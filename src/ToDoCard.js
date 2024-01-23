@@ -1,4 +1,6 @@
 function ToDoCard({ title, toDo, done, index, toggleDone, onDelete }) {
+  console.log("Rendering ToDoCard", title, toDo, done);
+
   //  반복해서 사용하므로, 컴포넌트로 분리한다.
   return (
     //  완료 여부에 따라 클래스를 부여하고, 버튼의 라벨을 변경한다.
