@@ -7,7 +7,7 @@
    : useState를 사용하여 애플리케이션의 상태를 관리했습니다. useState는 각각의 상태 변수를 선언하고 해당 상태를 업데이트하는 함수를 반환합니다.<br>
 
 3. 애플리케이션의 **상태 값들을 컴포넌트 간 어떤 방식으로 공유하셨나요**?<br>
-   : 상태 값들은 App 컴포넌트에서 관리되고, 필요한 값들은 해당 값을 사용하는 하위 컴포넌트에 props로 전달하는 방식으로 공유했습니다. (Ex. ToDoCard와 DoneBtn 컴포넌트에 title, toDo, done, index 등의 값들을 props로 전달하여 사용했습니다.)<br>
+   : 상태 값들은 App 컴포넌트에서 관리되고, 필요한 값들은 해당 값을 사용하는 하위 컴포넌트에 props로 전달하는 방식으로 공유했습니다. (Ex. ToDoCard와 DoneBtn 컴포넌트에 title, toDo, done, index, toggleDone, onDelete, onClick, text 등의 값들을 props로 전달하여 사용했습니다. 이 외에 ToDoList에는 isDone, toDos, toggleDone, onDelete를 props로 전달받아 사용하였습니다.)<br>
 
 4. 기능 구현을 위해 **불변성 유지가** 필요한 부분이 있었다면 하나만 설명해 주세요.<br>
    : toggleDone 함수에서 상태 배열을 업데이트할 때, 불변성을 유지하기 위해 map 함수를 사용하고, 변경이 필요한 요소만 새로운 객체로 복사하여 업데이트 하도록 했습니다. 해당 state가 변경됨에 따라 리렌더링이 발생할수 있기에, 효율적으로 리렌더링을 수행하기 위해서는 해당 부분에 불변성을 유지하는 것이 중요했습니다.<br>
